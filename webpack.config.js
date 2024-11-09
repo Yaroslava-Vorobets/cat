@@ -9,16 +9,25 @@ module.exports = (env) => {
     mode: env.mode?? 'development',
     entry: {
       main: path.resolve(__dirname, './src/index.js'),
+
+      // // Runtime code for hot module replacement
+      // hot: 'webpack/hot/dev-server.js',
+      // // Dev server client for web socket transport, hot and live reload logic
+      // client: 'webpack-dev-server/client/index.js?hot=true&live-reload=true',
     },
       
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].[contanthash].js',
-        // clean: true,
+        //filename: '[name].[contanthash].js',
+        clean: true,
     },
     plugins: [
       new HtmlWebpackPlugin({ template: 'index.html' }),
       new CleanWebpackPlugin(),
+
+       // Plugin for hot module replacement     
+     
       new webpack.HotModuleReplacementPlugin({ template: 'index.html' }),
       new MiniCssExtractPlugin()
     ],
@@ -59,10 +68,15 @@ module.exports = (env) => {
   devServer: {     
     
     static: {
-      directory: path.join(__dirname, ''), // Директорія для статичних файлів
+      directory: path.join(__dirname, './src/index.js'), // Директорія для статичних файлів
     },
-      hot: true, // Активує HMR     
-      open: true,
+    hot: true, // Активує HMR     
+    open: true,
+
+      // Dev server client for web socket transport, hot and live reload logic
+   
+     client: false,
+     
       // historyApiFallback: true, 
   
       },

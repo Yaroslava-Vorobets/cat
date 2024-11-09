@@ -4,8 +4,7 @@ import { fetchBreeds } from './cat-api';
 import { fetchCatByBreed } from './cat-api';
 
 const select = document.querySelector('.breed-select ')
-const catInfo = document.querySelector('.cat_info')
-
+const catInfo = document.querySelector('.cat_info');
 const wrapper = document.querySelector(".wrapper")
 
 import {Notify} from 'notiflix';
@@ -21,7 +20,8 @@ fetchBreeds().then((data) => {
     clickToClose: 'true'
   })
   data.map(({id, name}) => {
-    const option = document.createElement('option')
+    const option = document.createElement('option');
+    option.classList.add('optionclass')
     option.value = `${ id }`
     option.textContent = ` ${name}`;
 
@@ -71,7 +71,7 @@ function inputValue(e) {
     wrapper.classList.replace('visible','hidden');
  
     catInfo.innerHTML = marckup;   
-
+   
   }).catch(() => {
     select.classList.add('hidden');
     wrapper.classList.add('hidden');
@@ -83,6 +83,8 @@ function inputValue(e) {
     clickToClose: 'true'
   });
   })
+
+
  
 }
 
